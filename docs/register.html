@@ -45,11 +45,14 @@
       <span class="fw-bold text-center" style="letter-spacing: .5em; ">
         S·O·B·I·E
       </span> -->
-      <a id="navSobieLogo" href="/" href="index.html">
+      <a id="navSobieLogo" href="index.html" class="ms-2">
         <img src="assets/sobie-icon.svg" class="img-fluid navbar-brand" width="62">
       </a>
 
-    <span class="fs-6"><i>The Society of Business, Industry, & Economics</i></span>
+    <span class="fs-6">
+      
+       SOBIE:<i>The Society of Business, Industry, & Economics</i></span>
+      
     <!-- hamburger button -->
     <button class="navbar-toggler me-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -74,16 +77,12 @@
 
   <div class="row">
     <div class="col-md-10 offset-md-1">
-      <h2>SOBIE 2025: Registration Generation Form</h2>
+      <h2>SOBIE 2025: Online Registration Form</h2>
 
       <!-- process info -->
       <div class="text-center">
-        <div class="rounded-pill border-1 alert-primary" style="border: solid 1px">
-          <p class=" mt-2">This form does not directly submit your registration to SOBIE.</p>
-          <p>Complete this form to <i>generate</i> your registration information.</p>
-          <p>Once completed, you may submit via email and include your research submission as an attachment if
-            applicable.</p>
-          <p>Alternatively, directly email kdmalone@una.edu (Subject: SOBIE '25 Registration) with the same info from this form.</p>
+        <div class="rounded m-2 border-1 alert alert-info" style="border: solid 1px">
+          This form ⭐️now registers you for SOBIE⭐️ and provides you with an email confirmation. 
         </div>
       </div>
       <!-- end process info -->
@@ -93,7 +92,7 @@
           <h4 class="text-muted mt-2">SOBIE '25 Details</h4>
           <ul class="list-group list-group-flush shadow-sm">
             <li class="list-group-item">
-              <strong>REGISTRATION DEADLINE:</strong> TBA, mid to late March, 2025
+              <strong>REGISTRATION DEADLINE:</strong> ~late March, 2025
             </li>
             <li class="list-group-item">
               <strong>SOBIE Dates:</strong> Wednesday, April 9th through Friday, April 11th, 2025
@@ -103,7 +102,7 @@
               Florida
             </li>
             <li class="list-group-item">
-              <strong>SOBIE Conference Fee:</strong> Conference Fee (Includes Plenary Session Breakfast, Thursday, April
+              <strong>SOBIE Conference Fee:</strong> Conference Fee: $325 (Includes Plenary Session Breakfast, Thursday, April
               10th)<br>
               <i class="mt-1 ms-4">Student Fee: $0 (but you must complete this registration form)</i>
             </li>
@@ -271,9 +270,11 @@
                   value="yes" required>
                 <label class="btn btn-outline-info text-dark" for="hotelAgree">I acknowledge that I must make hotel
                   accommodations separately from this Conference Registration Form</label>
+               
                 <div class="invalid-feedback ms-3 my-auto">Please click the hotel acknowledgement to continue</div>
 
               </div>
+              <div class="ms-3 my-3 right">👆🏻Please click the hotel acknowledgement to continue</div>
             </div>
 
 
@@ -318,8 +319,7 @@
           <div id="notSubmitYetSection">
             <ul>
               <li class="list-group-item border-0" id="notSubmitMsg">
-                <i>Thank you for letting us know. <br>Please email your your submission to SOBIE@EMAIL when you are
-                  ready</i>
+                <i>Thank you for letting us know. <br>Please email your your submission when you are ready (details in your registraton confirmation email)</i>
               </li>
           </div>
           <!-- end not submitting yet -->
@@ -329,8 +329,7 @@
             <ul>
               <li class="list-group-item border-0" id="notSubmitMsg">
                 <i>Thank you for letting us know. <br>
-                  If you change your mind, you may still submit via email to the
-                  SOBIE editor</i>
+                  If you change your mind, you may still submit via email to the SOBIE editor (details in your registraton confirmation email)</i>
               </li>
           </div>
           <!-- end not submitting  -->
@@ -563,7 +562,7 @@
   <!--  reviewModal -->
   <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content">
+      <div id="reviewConfirm" class="modal-content">
         <div class="modal-header">
           <!-- todo: update date with variable -->
           <h2 class="modal-title">Review SOBIE '25 Registration Information</h2>
@@ -571,7 +570,7 @@
         </div>
         <div class="modal-body ">
 
-          <div>
+          <!-- <div>
             <i class="bi bi-1-circle-fill me-2"></i>Review Your Registration Information. <br>
             <i class="bi bi-2-circle-fill me-2"></i>Either:<br>
             <p class="ms-3">COPY/PASTE this information & email to <a href="/cdn-cgi/l/email-protection"
@@ -585,7 +584,7 @@
 
 
 
-          </div>
+          </div> -->
 
           <ul id="registrationReviewList" class="list-group">
 
@@ -594,7 +593,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go Back</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go Back & Make Changes</button>
           <button id="submitRegistration" type="button" class="btn btn-success">Submit Registration</button>
         
         </div>
@@ -613,7 +612,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="mailto:bcumbie@una.edu" class="nav-link px-2 text-body-secondary">
+      <a href="https://www.una.edu/faculty/bcumbie.html" target="_blank" class="nav-link px-2 text-body-secondary">
         @SOBIE Web Team
       </a>
     </li>

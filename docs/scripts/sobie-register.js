@@ -1,4 +1,4 @@
-let studentMode; 
+let studentMode, htmlBody, emailBody; 
 
 $(document).ready(() => {
 
@@ -246,92 +246,114 @@ $('#reviewRegistration').on('click', function(){
 
   grabFormData(); 
 
-  let htmlBody = "";
-  let emailBody = "SOBIE '54 Registration Information%0D%0A%0D%0A%0D%0A"; 
-  htmlBody += `<li class="list-group-item"><strong> Name:</strong> ${formData[0].registrantName} </li>`;
-  emailBody += `Name: ${formData[0].registrantName}%0D%0A`;  
+  htmlBody = "";
+  emailBody = ""; 
+  emailBody += "SOBIE '25 Registration Information\r"; 
+  emailBody += "=============================\r\r";
+  
+  if(formData[0].registrantFirstName || formData[0].registrantFirstName){
+    htmlBody += `<li class="list-group-item"><strong> Name:</strong> ${formData[0].registrantName} </li>`;
+    emailBody += `Name: ${formData[0].registrantName}\r\r`;  
+  }
 
-  htmlBody += `<li class="list-group-item"><strong>Email:</strong> ${formData[0].email} </li>`; 
-  emailBody += `Email: ${formData[0].email}%0D%0A`; 
+  if(formData[0].email){
+    htmlBody += `<li class="list-group-item"><strong>Email:</strong> ${formData[0].email} </li>`; 
+    emailBody += `Email: ${formData[0].email}\r\r`; 
+  }
 
-  htmlBody += `<li class="list-group-item"><strong>First Time Attending SOBIE:</strong> ${formData[0].firstSobie} </li>`; 
-  emailBody += `First Time Attending SOBIE: ${formData[0].firstSobie}%0D%0A`; 
+  if(formData[0].firstSobie){
+    htmlBody += `<li class="list-group-item"><strong>First Time Attending SOBIE:</strong> ${formData[0].firstSobie} </li>`; 
+    emailBody += `First Time Attending SOBIE: ${formData[0].firstSobie}\r\r`; 
+  }
 
   console.log('student mode', studentMode);
   if(formData[0].studentStatus === 'yes') {
       htmlBody += 
       `<li class="list-group-item"><strong>Student Affiliation:</strong> ${formData[0].student[0].affiliation}, ${formData[0].student[0].program}, ${formData[0].student[0].class} </li>`;
-      emailBody += `Student Affiliation: ${formData[0].student[0].affiliation}, ${formData[0].student[0].program}, ${formData[0].student[0].class}%0D%0A`;
+      emailBody += `Student Affiliation: ${formData[0].student[0].affiliation}, ${formData[0].student[0].program}, ${formData[0].student[0].class}\r\r`;
     }
   else if(formData[0].studentStatus === 'no') {
        htmlBody += 
          `<li class="list-group-item"><strong>Affiliation:</strong> ${formData[0].faculty[0].affiliation}, ${formData[0].faculty[0].rank} </li>`;
-         emailBody += `Affiliation: ${formData[0].faculty[0].affiliation}, ${formData[0].faculty[0].rank}%0D%0A`;
+         emailBody += `Affiliation: ${formData[0].faculty[0].affiliation}, ${formData[0].faculty[0].rank}\r\r`;
     }
 
-    htmlBody += `<li class="list-group-item"><strong>Hotel Acknowledgement:</strong> ${formData[0].hotel}`; 
-    emailBody += `Hotel Acknowledgement: ${formData[0].hotel}`;
+    if(formData[0].hotel){
+      htmlBody += `<li class="list-group-item"><strong>Hotel Acknowledgement:</strong> ${formData[0].hotel}`; 
+      emailBody += `Hotel Acknowledgement: ${formData[0].hotel}\r\r`;
+    }
 
 //
     //yesNow yesLater noAttend 
-    if(formData[0].researchStatus === "yesNow")
+  if(formData[0].researchStatus === "yesNow")
    {
     htmlBody += `<li class="list-group-item"><strong>Research Submission:</strong> ${formData[0].title} (${formData[0].submissionType})</li>`;
-    emailBody += `Research Submission: ${formData[0].title}, ${formData[0].submissionType}%0D%0A`;
+    emailBody += `Research Submission: ${formData[0].title}, ${formData[0].submissionType}\r\r`;
 
     
     //if coauthors and in student mode (no collaboration & session preference)
     if(formData[0].coauthors === 'yes' && formData[0].studentStatus === 'yes'){
       htmlBody += `<li class="list-group-item"><strong>Student co-authors:</strong></li> ${formData[0].coauthors} </li>`; 
-      emailBody += `Student co-authors: ${formData[0].coauthors}%0D%0A`;
+      emailBody += `Student co-authors: ${formData[0].coauthors}\r\r`;
 
     }
     //if coauthors & NOT student mode =  student collaboration & pref.
     else if(formData[0].coauthors === 'yes' && formData[0].studentStatus === 'no' && formData[0].studentCollaboration === 'yes'){
        htmlBody += `<li class="list-group-item"><strong>Student Reserach Collaboration Session Preference:</strong></li>${formData[0].collaborationPreference} </li>`; 
-        emailBody += `Student Reserach Collaboration Session Preference: ${formData[0].collaborationPreference}%0D%0A`;
+        emailBody += `Student Reserach Collaboration Session Preference: ${formData[0].collaborationPreference}\r\r`;
 
     }
     // yes coathors and NOT student mode but no student collab, so no PREF. 
     else if(formData[0].coauthors === 'yes' && formData[0].studentStatus === 'no' && formData[0].studentCollaboration === 'no')
     {
        htmlBody += `<li class="list-group-item"><strong>Co-authors:</strong></li> ${formData[0].coauthors} </li>`;; 
-        emailBody += `Co-authors: ${formData[0].coauthors}%0D%0A`;
+      emailBody += `Co-authors: ${formData[0].coauthors}\r\r`;
     }
     
     htmlBody += `<li class="list-group-item"><strong>Submission Abstract:</strong> ${formData[0].abstract} </li>`; 
     emailBody += `Submission Abstract: ${formData[0].abstract}%0D%0A`;
 
     htmlBody += `<li class="list-group-item"><strong>Research Area:</strong> ${formData[0].area} </li>`; 
-    emailBody += `Research Area: ${formData[0].area}%0D%0A`;
+    emailBody += `Research Area: ${formData[0].area}\r`;
 
     htmlBody += `<li class="list-group-item"><strong>Include in Proceedings:</strong> ${formData[0].proceedings} </li>`;   
-    emailBody += `Include in Proceedings: ${formData[0].proceedings}%0D%0A`;
+    emailBody += `Include in Proceedings: ${formData[0].proceedings}\r`;
 
    } 
-   else{
-    htmlBody += `<li class="list-group-item"><strong>Research Submission Status:</strong> No or not at this time. <br><i>You may submit your research directly to the SOBIE conference chair (kdmalone@una.edu).</i></li>`;
+   else if(formData[0].researchStatus){
+    htmlBody += `<li class="list-group-item"><strong>Research Submission Status:</strong> No or not at this time. <br><i>You may submit research directly to the SOBIE Conference Chair: kdmalone@una.edu.</i></li>`;
+    emailBody += `Research Submission Status:  No or not at this time.\rYou may submit research directly to the SOBIE Conference Chair: kdmalone@una.edu\r\r`; 
    }
 
     if(formData[0].details.length > 1){
       htmlBody += `<li class="list-group-item"><strong>Additional Registration Information:</strong> ${formData[0].details} </li>`
-      emailBody += `Additional Registration Information:  ${formData[0].details}%0D%0A`;
+      emailBody += `Additional Registration Information:  ${formData[0].details}\r\r`;
     }
     
 
   console.log('htmlBody: ', htmlBody);
-  // $('#registrationReviewList').append(htmlBody);
+  $('#registrationReviewList').append(htmlBody);
   
-  emailBody += `%0D%0A%0D%0A%0D%0APlease attach your research submission to this email%0D%0A%0D%0A%0D%0AThank you,%0D%0AThe SOBIE Team`;
+  // emailBody += `%0D%0A%0D%0A%0D%0APlease attach your research submission to this email%0D%0A%0D%0A%0D%0AThank you,%0D%0AThe SOBIE Team`;
  
   //append hotel code info 
-  emailBody += `%0D%0A%0D%0A%0D%0ASOBIE Group Code: https%3A%2F%2Fwww.sandestin.com%2Fbook-now%3Fgroup%3D24Q3L3%26checkin%3D04%2F09%2F2024%26checkout%3D04%2F13%2F2024%26rooms%3D1%26adults%3D1%23%2Froom`;
-  emailBody += `%0D%0A%0D%0A800-320-8115, use code: 24Q3L3`;
+  //todo: update from sobie-data.js
+  emailBody += `Sandestin Resort Accommodations\rSOBIE Group Code: https://www.sandestin.com/book-now?group=24X7C2&checkin=04/07/25&checkout=04/13/25&rooms=1&adults=1&PID=39297#/room\r`;
+  emailBody += `or call: 800-320-8115, use code: 24X7C2\r\r`;
 
-  emailBody = emailBody.replace(',' ,'%2C'); 
-  emailBody = emailBody.replace(',' ,'%2C'); 
+  // emailBody = emailBody.replace(',' ,'%2C'); 
+  // emailBody = emailBody.replace(',' ,'%2C'); 
   
-  console.log('emailBody:' , emailBody); 
+  emailBody += `For any changes to your registration information, please email the SOBIE conference chair, Dr. Malone: kdmalone@una.edu\r\r`;
+
+  emailBody += `Next Steps:\rLook out for an email from you SOBIE Conference Chair with a decision on submitted research and further instructions.`;
+
+  emailBody += `Thank you for using the https://SOBIECONFERENCE.org email registration.\rThis is built from the ground up by undergraduate students at UNA.\rWe appreciate your patience!\r\r-See you in Sandestin ☀️\rThe SOBIE WEB TEAM\r\r`;
+
+  emailBody += `SOBIE '25 CFP: https://www.sobieconference.org/assets/sobieDocs/sobie2025-callForPapers.pdf`;
+
+
+  // console.log('emailBody:' , emailBody); 
   
   //todo: revive? 
     // $('#mailLink').append(`<a class="btn btn-success" href="mailto:kdmalone@una.edu?cc=bcumbie@una.edu&subject=SOBIE24 Registration:${formData[0].registrantName}&body=${emailBody}">click here</a>`); 
@@ -355,18 +377,32 @@ $('#submitRegistration').on('click',()=>{
   console.log('in submit registration save & email'); 
     // e.preventDefault(); 
     
-    let renderApp = 'http://localhost:3000/register';
+    // let renderApp = 'https://sobiecontroller.onrender.com/register';
+    let renderApp = 'http://localhost:3000/register'; 
 
     $.ajax({
       url: renderApp,
       type: 'post',
       dataType: 'json',
-      data: { registrationData: formData[0] },
+      data: { registrationData: formData[0], emailBody: emailBody, htmlBody: htmlBody },
       success: function(data) {
           console.log('data', data); 
+          console.log('data', data.sobieRegCode); 
+      
       }
     });
 
+    $('#reviewConfirm').empty().append(` <div class="modal-header">
+          <!-- todo: update date with variable -->
+          <h2 class="modal-title">SOBIE '25 Registration Confirmation</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>`).append(`<div class="modal-body text-center">
+          <p>Please check your email for your registration confirmation<br><br><i>${formData[0].email}</i><br><br>
+          Please add <i>noreply@sobieconference.org</i> to your known senders list.<br><br>
+          Thank you and see you in sunny Sandestin! ☀️<br>
+          -The SOBIE Web Team<br><br>
+          <a href="index.html">close & go back to SOBIE</a>
+          </div>`); 
 
 
     })
@@ -417,6 +453,8 @@ function grabFormData() {
       }
     });
     formData[0].registrantName = $('#lastName').val() + ', ' + $('#firstName').val(); 
+    formData[0].registrantLastName = $('#lastName').val(); 
+    formData[0].registrantFirstName = $('#firstName').val(); 
     formData[0].email = $('#email').val(); 
     
     if(formData[0].studentStatus === 'yes') {
@@ -450,6 +488,8 @@ function grabFormData() {
 const formData = [
 	{
         registrantName: '', 
+        registrantFirstName: '', 
+        registrantLastName: '',
         email: '', 
         firstSobie: '', 
         studentStatus: '', 
