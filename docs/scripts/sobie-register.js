@@ -377,8 +377,8 @@ $('#submitRegistration').on('click',()=>{
   console.log('in submit registration save & email'); 
     // e.preventDefault(); 
     
-    // let renderApp = 'https://sobiecontroller.onrender.com/register';
-    let renderApp = 'http://localhost:3000/register'; 
+    let renderApp = 'https://sobiecontroller.onrender.com/register';
+    // let renderApp = 'http://localhost:3000/register'; 
 
     $.ajax({
       url: renderApp,
@@ -387,8 +387,7 @@ $('#submitRegistration').on('click',()=>{
       data: { registrationData: formData[0], emailBody: emailBody, htmlBody: htmlBody },
       success: function(data) {
           console.log('data', data); 
-          console.log('data', data.sobieRegCode); 
-      
+       
       }
     });
 
