@@ -1,8 +1,8 @@
 let studentMode; 
-     
+
 $(document).ready(() => {
 
-    console.log("ready"); 
+    console.log("registration page ready!"); 
 
     // "declarations" hide & build
      let studentMode = false; 
@@ -54,7 +54,7 @@ $(document).ready(() => {
       
 
     }
- function buildResearchAreasButtons() {
+    function buildResearchAreasButtons() {
 
         let $researchArea;
 
@@ -88,9 +88,8 @@ $(document).ready(() => {
     $('.sobieFirst').change((e) => {
        
         e.preventDefault(); 
-        $yesNo = $('#' + e.target.getAttribute("id")); 
+        let  $yesNo = $('#' + e.target.getAttribute("id")); 
        
-
         if ($yesNo.val()==='yes') {
           $('#firstSobieMessage').text("Great! We look forward to meeting you!");
         }
@@ -101,8 +100,11 @@ $(document).ready(() => {
     }); 
 
     $('.sobieStudent').change((e) => {
-        //e.preventDefault(); 
-        $yesNoStudent = $('#' + e.target.getAttribute("id")); 
+        console.log('in student  change'); 
+     
+        e.preventDefault(); 
+        
+        let $yesNoStudent = $('#' + e.target.getAttribute("id")); 
       
         if ($yesNoStudent.val() === 'yes') {
          $('#sobieFacultySection').hide(); 
@@ -110,7 +112,6 @@ $(document).ready(() => {
           studentMode = true; 
           $('#studentPaperGroup').hide();
           $('#studentPaperPreference').hide();
-          
           
        
         }
@@ -125,8 +126,9 @@ $(document).ready(() => {
     });
 
     $('.studentClass').change((e) => {
+      console.log('in student class change'); 
         e.preventDefault(); 
-        $studentOther = $('#' + e.target.getAttribute("id")); 
+        let $studentOther = $('#' + e.target.getAttribute("id")); 
 
         if ($studentOther.val() === 'other') {
          $("#studentOtherText").prop('disabled', false).show(); 
@@ -147,7 +149,7 @@ $(document).ready(() => {
 
      $('.researchIntent').change((e) => {
         e.preventDefault(); 
-        $researchIntent = $('#' + e.target.getAttribute("id")); 
+        let $researchIntent = $('#' + e.target.getAttribute("id")); 
 
         if ($researchIntent.val() === 'yesNow') {
          $("#submissionSection").show(); 
@@ -170,7 +172,7 @@ $(document).ready(() => {
 
      $('.studentPaper').change((e) => {
         e.preventDefault(); 
-        $studentPaper = $('#' + e.target.getAttribute("id")); 
+        let $studentPaper = $('#' + e.target.getAttribute("id")); 
 
         if ($studentPaper.val() === 'yes') {
          $("#studentPaperPreference").show(); 
@@ -185,7 +187,7 @@ $(document).ready(() => {
 
      $('.researchAreas').change((e) => {
         e.preventDefault(); 
-        $researchAreasOther = $('#' + e.target.getAttribute("id")); 
+        let $researchAreasOther = $('#' + e.target.getAttribute("id")); 
 
         if ($researchAreasOther.val() === 'other') {
          $("#researchAreaOtherText").prop('disabled', false).show(); 
@@ -199,7 +201,7 @@ $(document).ready(() => {
 
      $('.submissionAuthors').change((e) => {
         e.preventDefault(); 
-        $submissionAuthors = $('#' + e.target.getAttribute("id")); 
+        let $submissionAuthors = $('#' + e.target.getAttribute("id")); 
 
         if ($submissionAuthors.val() === 'yes') {
           if(studentMode) {
@@ -220,6 +222,7 @@ $(document).ready(() => {
       }
     });
     
+    //currently turnd off 
     $('.timeSlot').change((e) => {
         e.preventDefault(); 
         $timeSlot = $('#' + e.target.getAttribute("id")); 
@@ -234,8 +237,6 @@ $(document).ready(() => {
         //    $("#submissionAuthorshipGroup").hide(); 
        //      }
     });
-
-
 
 //$('#reviewModal').on('show.bs.modal', function(){
   
@@ -255,7 +256,6 @@ $('#reviewRegistration').on('click', function(){
 
   htmlBody += `<li class="list-group-item"><strong>First Time Attending SOBIE:</strong> ${formData[0].firstSobie} </li>`; 
   emailBody += `First Time Attending SOBIE: ${formData[0].firstSobie}%0D%0A`; 
-
 
   console.log('student mode', studentMode);
   if(formData[0].studentStatus === 'yes') {
@@ -319,8 +319,8 @@ $('#reviewRegistration').on('click', function(){
     }
     
 
-  console.log(htmlBody);
-  $('#registrationReviewList').append(htmlBody);
+  console.log('htmlBody: ', htmlBody);
+  // $('#registrationReviewList').append(htmlBody);
   
   emailBody += `%0D%0A%0D%0A%0D%0APlease attach your research submission to this email%0D%0A%0D%0A%0D%0AThank you,%0D%0AThe SOBIE Team`;
  
@@ -331,9 +331,10 @@ $('#reviewRegistration').on('click', function(){
   emailBody = emailBody.replace(',' ,'%2C'); 
   emailBody = emailBody.replace(',' ,'%2C'); 
   
-  console.log(emailBody); 
+  console.log('emailBody:' , emailBody); 
   
-  $('#mailLink').append(`<a class="btn btn-success" href="mailto:kdmalone@una.edu?cc=bcumbie@una.edu&subject=SOBIE24 Registration:${formData[0].registrantName}&body=${emailBody}">click here</a>`); 
+  //todo: revive? 
+    // $('#mailLink').append(`<a class="btn btn-success" href="mailto:kdmalone@una.edu?cc=bcumbie@una.edu&subject=SOBIE24 Registration:${formData[0].registrantName}&body=${emailBody}">click here</a>`); 
 
    //<a href="mailto:email@example.com">Send Email</a>
 
@@ -346,6 +347,29 @@ $('#reviewRegistration').on('click', function(){
   
 });    
 
+//send static front end form to our node back 
+//to save in a mongo atlas & email to ppl
+//would be great to get ID and link back too!  
+$('#submitRegistration').on('click',()=>{
+
+  console.log('in submit registration save & email'); 
+    // e.preventDefault(); 
+    
+    let renderApp = 'http://localhost:3000/register';
+
+    $.ajax({
+      url: renderApp,
+      type: 'post',
+      dataType: 'json',
+      data: { registrationData: formData[0] },
+      success: function(data) {
+          console.log('data', data); 
+      }
+    });
+
+
+
+    })
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 // (function () {
@@ -368,7 +392,9 @@ $('#reviewRegistration').on('click', function(){
 //     })
 // })()
 
- }); //end doc ready 
+
+
+ }); //end of doc ready 
 
 
 function grabFormData() {
@@ -417,12 +443,9 @@ function grabFormData() {
     formData[0].area = $('#researchArea').val(); 
     formData[0].details = $('#anyOtherDetails').val(); 
     
-    //console.log(formData[0]);
+    console.log('formDataObject: ', formData[0]);
 
 }
-
-
-
 
 const formData = [
 	{
@@ -455,24 +478,26 @@ const formData = [
     }
 ]; 
  
-const sobieDates = 
-[
-    {year: "2024",
-     month: "April",
-     wednesday: "April 10",
-     thursday: "April 11",
-     friday: "April 12",
-     start: "April 10",
-     end: "April 14", 
-     numDates: "4/10/2023 - 4/12/2023",
-     numDatesShort: "4/10 to 4/12"
-    }
-]; 
+// const sobieDates = 
+// [
+//     {year: "2024",
+//      month: "April",
+//      wednesday: "April 10",
+//      thursday: "April 11",
+//      friday: "April 12",
+//      start: "April 10",
+//      end: "April 14", 
+//      numDates: "4/10/2023 - 4/12/2023",
+//      numDatesShort: "4/10 to 4/12"
+//     }
+// ]; 
 
 const researchAreasData = 
 [
     "Advertising & Promotion", "Business Administration", "Business Communication", "Business Education", "Business Ethics", "Business Information Systems (CIS or MIS)", "Business Law", "Case Studies", "E-Commerce", "Economics", "Entrepreneurship", "Family & Small Business Enterprises", "Finance", "Governmental Accounting", "Health Care Administration", "History of Economic Thought", "Human Resource Management", "Interdisciplinary Research", "International Business", "Leadership", "Management", "Marketing", "Medical Economics", "Non-Profit Organizations", "Operations Management", "Organizational Behavior & Theory", "Organizational Development", "Pedagogy", "Public Administration", "Public Policy Analysis", "Sales Management", "Sports Economics", "Statistics", "Strategic Management Policy", "Tax Policy", "Trade"
 ]; 
+
+
 
 
 

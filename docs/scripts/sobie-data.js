@@ -5,18 +5,19 @@ const sobieDates = {
   getSobieStart(){return `${weekday[this.sobieStartDate.getDay()]},  ${month[this.sobieStartDate.getMonth()]} ${this.sobieStartDate.getDate()}, ${this.sobieStartDate.getFullYear()}`},
   getSobieEnd(){return `${weekday[this.sobieEndDate.getDay()]},  ${month[this.sobieEndDate.getMonth()]} ${this.sobieEndDate.getDate()}, ${this.sobieEndDate.getFullYear()}`},
   sobieCallForPapersDate: {
-    ready: false,
+    ready: true,
     estimate: "TBA mid December",
-    actual: ""},
+    actual: new Date("Jan 7 2025 09:06:00 CST)")},
   sobieRegistrationDate: {
     ready: false, 
     estimate: "TBA mid March",
   },
   sobieRate : {
-    ready: false, 
-    estimate: "TBA mid January", 
-    code: "", 
-    link: ""
+    ready: true, 
+    estimate: "TBA mid January",
+    actual: new Date("Jan 7 2025 09:06:00 CST)"),
+    code: "24X7C2", 
+    url: "https://www.sandestin.com/book-now?group=24X7C2&checkin=04/07/25&checkout=04/13/25&rooms=1&adults=1&PID=39297#/room"
   }
 }
 

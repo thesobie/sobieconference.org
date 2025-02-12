@@ -147,12 +147,13 @@
           <div class="input-group ms-2  mb-3">
             <span class="input-group-text me-2" id="firstSobieGroup">First Time Attending Sobie?</span>
             <div class="btn-group" role="group">
-              <input type="radio" class="btn-check sobieFirst" name="sobieFirst" id="firstYes" autocomplete="off"
-                value="yes" required>
+              <input type="radio" class="btn-check sobieFirst" name="sobieFirst" id="firstYes" autocomplete="off" value="yes" required>
               <label class="btn btn-outline-primary" for="firstYes">Yes</label>
+             
               <input type="radio" class="btn-check sobieFirst" name="sobieFirst" id="firstNo" autocomplete="off"
                 value="no" required>
               <label class="btn btn-outline-primary" for="firstNo">No</label>
+              
               <span class="invalid-feedback ms-3 my-auto">Please select an option</span>
               <span class="fw-bold fst-italic ms-3 my-auto" id="firstSobieMessage"> </span>
             </div>
@@ -564,7 +565,8 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="modal-title">Review SOBIE '24 Registration Information</h2>
+          <!-- todo: update date with variable -->
+          <h2 class="modal-title">Review SOBIE '25 Registration Information</h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body ">
@@ -593,6 +595,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go Back</button>
+          <button id="submitRegistration" type="button" class="btn btn-success">Submit Registration</button>
+        
         </div>
       </div>
     </div>
@@ -628,7 +632,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
 
-<script type="module" src="scripts/sobie-controller.js"></script>
+<!-- <script type="module" src="scripts/sobie-controller.js"></script> -->
+
+<script type="module" src="scripts/sobie-register.js"></script>
 
 </body>
 
