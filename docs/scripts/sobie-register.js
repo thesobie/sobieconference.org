@@ -376,9 +376,10 @@ $('#submitRegistration').on('click',()=>{
 
   console.log('in submit registration save & email'); 
     // e.preventDefault(); 
-    
-    let renderApp = 'https://sobiecontroller.onrender.com/register';
-    // let renderApp = 'http://localhost:3000/register'; 
+
+    // toggle between live controller and your local one...no more junk emails to editor while we test! 
+    // let renderApp = 'https://sobiecontroller.onrender.com/register';
+    let renderApp = 'http://localhost:3000/register'; 
 
     $.ajax({
       url: renderApp,
